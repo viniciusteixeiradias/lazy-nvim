@@ -26,9 +26,40 @@ vim.keymap.set("n", "<leader><leader>", function()
   -- Reload the current script in normal mode.
 end)
 
+-- local function replace_all()
+--   -- Get user input for search pattern and new value
+--   local search_pattern = vim.fn.input("Enter search pattern: ")
+--   local new_value = vim.fn.input("Type the new value: ")
+--
+--   -- Use vimgrep to get a list of files containing the search pattern
+--   local files = vim.fn.split(vim.fn.systemlist("vimgrep /" .. search_pattern .. "/j **/*"), "\n")
+--
+--   -- Iterate over the files and perform the replacement
+--   for _, file in ipairs(files) do
+--     vim.api.nvim_command("edit " .. file)
+--     vim.api.nvim_buf_set_option(0, "modifiable", true)
+--     vim.api.nvim_buf_set_option(0, "buftype", "")
+--     vim.api.nvim_buf_set_option(0, "swapfile", false)
+--
+--     -- Perform the replacement using the substitute command
+--     vim.api.nvim_command(
+--       ":%s/" .. vim.fn.escape(search_pattern, "/") .. "/" .. vim.fn.escape(new_value, "/") .. "/g | update"
+--     )
+--
+--     vim.api.nvim_buf_set_option(0, "modifiable", false)
+--   end
+-- end
+--
+-- vim.keymap.set("n", "<leader>ra", replace_all, {})
+
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
+vim.keymap.set(
+  "n",
+  "<leader>pf",
+  "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+  { noremap = true }
+)
 vim.keymap.set("n", "<leader>pw", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>pt", builtin.help_tags, {})

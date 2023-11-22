@@ -8,6 +8,14 @@ return {
   { "dstein64/vim-startuptime", enabled = false },
   { "mfussenegger/nvim-lint", enabled = false },
 
+  -- devcontainer
+  {
+    "https://codeberg.org/esensar/nvim-dev-container",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = { setup = {} },
+  },
+
+  -- flutter
   {
     "akinsho/flutter-tools.nvim",
     lazy = false,
@@ -38,7 +46,29 @@ return {
   },
 
   -- harpon tabs
-  { "theprimeagen/harpoon" },
+  {
+    "theprimeagen/harpoon",
+    init = function()
+      local mark = require("harpoon.mark")
+      local ui = require("harpoon.ui")
+
+      vim.keymap.set("n", "<leader>a", mark.add_file)
+      vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+      vim.keymap.set("n", "<C-1>", function()
+        ui.nav_file(1)
+      end)
+      vim.keymap.set("n", "<C-2>", function()
+        ui.nav_file(2)
+      end)
+      vim.keymap.set("n", "<C-n>", function()
+        ui.nav_file(3)
+      end)
+      vim.keymap.set("n", "<C-s>", function()
+        ui.nav_file(4)
+      end)
+    end,
+  },
 
   -- change trouble config
   {
@@ -89,7 +119,7 @@ return {
     dependencies = {
       "jose-elias-alvarez/typescript.nvim",
       init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
+        require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
