@@ -8,6 +8,14 @@ return {
   { "dstein64/vim-startuptime", enabled = false },
   { "mfussenegger/nvim-lint", enabled = false },
 
+  -- indentation style detection
+  -- {
+  --   "nmac427/guess-indent.nvim",
+  --   config = function()
+  --     require("guess-indent").setup({})
+  --   end,
+  -- },
+
   -- devcontainer
   {
     "https://codeberg.org/esensar/nvim-dev-container",
@@ -37,37 +45,19 @@ return {
     "folke/tokyonight.nvim",
     opts = {
       style = "night",
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
+      -- transparent = true,
+      -- styles = {
+      --   sidebars = "transparent",
+      --   floats = "transparent",
+      -- },
     },
   },
 
   -- harpon tabs
   {
     "theprimeagen/harpoon",
-    init = function()
-      local mark = require("harpoon.mark")
-      local ui = require("harpoon.ui")
-
-      vim.keymap.set("n", "<leader>a", mark.add_file)
-      vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-      vim.keymap.set("n", "<C-1>", function()
-        ui.nav_file(1)
-      end)
-      vim.keymap.set("n", "<C-2>", function()
-        ui.nav_file(2)
-      end)
-      vim.keymap.set("n", "<C-n>", function()
-        ui.nav_file(3)
-      end)
-      vim.keymap.set("n", "<C-s>", function()
-        ui.nav_file(4)
-      end)
-    end,
+    branch = "harpoon2",
+    require = { { "nvim-lua/plenary.nvim" } },
   },
 
   -- change trouble config

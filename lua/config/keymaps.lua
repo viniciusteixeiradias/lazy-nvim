@@ -1,7 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
 -- Set the mapleader to a space character for key mappings that use <leader>.
 vim.g.mapleader = " "
 
@@ -21,45 +17,40 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Edit the Packer.nvim configuration file in normal mode.
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/plugins/example.lua<CR>")
 
-vim.keymap.set("n", "<leader><leader>", function()
-  vim.cmd("so")
-  -- Reload the current script in normal mode.
-end)
+-- Harpoon
+local harpoon = require("harpoon")
 
--- local function replace_all()
---   -- Get user input for search pattern and new value
---   local search_pattern = vim.fn.input("Enter search pattern: ")
---   local new_value = vim.fn.input("Type the new value: ")
---
---   -- Use vimgrep to get a list of files containing the search pattern
---   local files = vim.fn.split(vim.fn.systemlist("vimgrep /" .. search_pattern .. "/j **/*"), "\n")
---
---   -- Iterate over the files and perform the replacement
---   for _, file in ipairs(files) do
---     vim.api.nvim_command("edit " .. file)
---     vim.api.nvim_buf_set_option(0, "modifiable", true)
---     vim.api.nvim_buf_set_option(0, "buftype", "")
---     vim.api.nvim_buf_set_option(0, "swapfile", false)
---
---     -- Perform the replacement using the substitute command
---     vim.api.nvim_command(
---       ":%s/" .. vim.fn.escape(search_pattern, "/") .. "/" .. vim.fn.escape(new_value, "/") .. "/g | update"
---     )
---
---     vim.api.nvim_buf_set_option(0, "modifiable", false)
---   end
--- end
---
--- vim.keymap.set("n", "<leader>ra", replace_all, {})
+harpoon:setup()
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set(
-  "n",
-  "<leader>pf",
-  "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
-  { noremap = true }
-)
-vim.keymap.set("n", "<leader>pw", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>pt", builtin.help_tags, {})
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- local builtin = require("telescope.builtin")
+-- vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+-- vim.keymap.set(
+--   "n",
+--   "<leader>pf",
+--   "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+--   { noremap = true }
+-- )
+-- vim.keymap.set("n", "<leader>pw", builtin.live_grep, {})
+-- vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
+-- vim.kveymap.set("n", "<leader>pt", builtin.help_tags, {})
+
+-- Keymap tips:
+-- N => "x": remove one char
+-- N => "ddp": change line lines above to below
+-- N => "di": deletes inside " or ', ( ...
+-- N => "yi": yank inside " or ', ( ...
+-- N => "dG": delete intire document up to down
+-- N => "dgg": delete intire document down to up
+-- I => "Ctrl + w": delete previous word
+-- I => "Ctrl + u": delete everything until the beginning of the line
+-- I => "Ctrl + o": switch back to normal mode just to execute one command
+-- N => "S": right indent
+-- N => "gg=G": indent the hole document
+--
