@@ -33,3 +33,5 @@ vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 vim.keymap.set("n", "<leader>mc", function() vim.cmd(":Gvdiffsplit!") end)
 vim.keymap.set("n", "<leader>gl", function() vim.cmd(":diffget //2") end)
 vim.keymap.set("n", "<leader>gr", function() vim.cmd(":diffget //3") end)
+
+vim.g.copilot_assume_mapped = true

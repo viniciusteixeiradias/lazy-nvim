@@ -6,5 +6,4 @@ return {
   { "folke/noice.nvim", enabled = false },
   { "dstein64/vim-startuptime", enabled = false },
   { "mfussenegger/nvim-lint", enabled = false },
-  { "L3MON4D3/LuaSnip", enabled = false },
 }
