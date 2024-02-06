@@ -29,28 +29,7 @@ vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
--- local builtin = require("telescope.builtin")
--- vim.keymap.set("n", "<C-p>", builtin.git_files, {})
--- vim.keymap.set(
---   "n",
---   "<leader>pf",
---   "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
---   { noremap = true }
--- )
--- vim.keymap.set("n", "<leader>pw", builtin.live_grep, {})
--- vim.keymap.set("n", "<leader>pb", builtin.buffers, {})
--- vim.kveymap.set("n", "<leader>pt", builtin.help_tags, {})
 
--- Keymap tips:
--- N => "x": remove one char
--- N => "ddp": change line lines above to below
--- N => "di": deletes inside " or ', ( ...
--- N => "yi": yank inside " or ', ( ...
--- N => "dG": delete intire document up to down
--- N => "dgg": delete intire document down to up
--- I => "Ctrl + w": delete previous word
--- I => "Ctrl + u": delete everything until the beginning of the line
--- I => "Ctrl + o": switch back to normal mode just to execute one command
--- N => "S": right indent
--- N => "gg=G": indent the hole document
---
+vim.keymap.set("n", "<leader>mc", function() vim.cmd(":Gvdiffsplit!") end)
+vim.keymap.set("n", "<leader>gl", function() vim.cmd(":diffget //2") end)
+vim.keymap.set("n", "<leader>gr", function() vim.cmd(":diffget //3") end)

@@ -36,3 +36,5 @@ vim.opt.colorcolumn = "80"
 
 -- Enable clipboard support
 vim.opt.clipboard:append("unnamedplus")
+
+vim.opt.conceallevel = 0 -- don't hide my json strings
