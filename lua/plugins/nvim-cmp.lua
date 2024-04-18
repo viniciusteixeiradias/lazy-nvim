@@ -15,14 +15,14 @@ return {
 
     local cmp_custom_mapping = {
       tab = function(fallback)
-        local copilot_keys = vim.fn["copilot#Accept"]()
+        -- local copilot_keys = vim.fn["copilot#Accept"]()
 
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
-          vim.api.nvim_feedkeys(copilot_keys, "i", true)
+        -- elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
+        --   vim.api.nvim_feedkeys(copilot_keys, "i", true)
         else
           fallback()
         end
@@ -51,6 +51,7 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
         ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
         ["<C-c>"] = cmp.mapping.complete(), -- Ask autocompletion
+        ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Select
         ["<Tab>"] = cmp.mapping(cmp_custom_mapping.tab, { "i", "s" }), -- Next
         ["<S-Tab>"] = cmp.mapping(cmp_custom_mapping.shift_tab, { "i", "s" }), -- Preview

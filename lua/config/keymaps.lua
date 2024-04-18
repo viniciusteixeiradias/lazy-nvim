@@ -34,4 +34,9 @@ vim.keymap.set("n", "<leader>mc", function() vim.cmd(":Gvdiffsplit!") end)
 vim.keymap.set("n", "<leader>gl", function() vim.cmd(":diffget //2") end)
 vim.keymap.set("n", "<leader>gr", function() vim.cmd(":diffget //3") end)
 
-vim.g.copilot_assume_mapped = true
+-- Copilot (Tab used for nvim-cmp and luasnip)
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+vim.g.copilot_no_tab_map = true
+
+-- LspRestart
+vim.keymap.set("n", "<leader>lr", function() vim.cmd(":LspRestart") end)
