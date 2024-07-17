@@ -11,5 +11,8 @@
         "enabled": true
       }
     }
-  }
+  },
+  "tsserver": {
+    "disable": true
+  },
 }
