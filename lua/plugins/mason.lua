@@ -6,6 +6,7 @@ return {
       "shellcheck",
       "shfmt",
       "flake8",
+      -- "MasonInstall vue-language-server@1.8.27"
     },
   },
 }
