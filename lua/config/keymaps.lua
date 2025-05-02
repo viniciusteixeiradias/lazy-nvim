@@ -22,7 +22,7 @@ local harpoon = require("harpoon")
 
 harpoon:setup()
 
-vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
@@ -40,3 +40,16 @@ vim.g.copilot_no_tab_map = true
 
 -- LspRestart
 vim.keymap.set("n", "<leader>lr", function() vim.cmd(":LspRestart") end)
+
+-- Jump between windows using Ctrl + h/j/k/l (with tree open)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  callback = function()
+    vim.keymap.set("n", "<C-h>", "<C-w>h", { buffer = true })
+    vim.keymap.set("n", "<C-l>", "<C-w>l", { buffer = true })
+    vim.keymap.set("n", "<C-j>", "<C-w>j", { buffer = true })
+    vim.keymap.set("n", "<C-k>", "<C-w>k", { buffer = true })
+  end,
+})
+
+-- space + uf (disable prettier)
