@@ -15,7 +15,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Edit the Packer.nvim configuration file in normal mode.
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/plugins/example.lua<CR>")
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/plugins<CR>")
 
 -- Harpoon
 local harpoon = require("harpoon")

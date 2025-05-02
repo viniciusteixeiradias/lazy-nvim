@@ -1,4 +1,5 @@
 return {
+  { "saghen/blink.cmp", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   { "echasnovski/mini.bufremove", enabled = false },
   { "stevearc/dressing.nvim", enabled = false },
